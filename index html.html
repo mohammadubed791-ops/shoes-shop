@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShoeZone - Premium Sports & Chelsea Shoes</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.6;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #ff6b6b;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #ff6b6b;
+        }
+
+        .hero {
+            height: 100vh;
+            background: url('https://images.unsplash.com/photo-1605348532760-6753d2c43329?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80') center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+        }
+
+        .hero-content {
+            z-index: 2;
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #ff6b6b;
+            color: white;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: all 0.3s;
+            animation: fadeInUp 1s ease-out 0.4s both;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.4);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        section {
+            margin-bottom: 6rem;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 3rem;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .shoe-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .shoe-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.2);
+        }
+
+        .shoe-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .shoe-card:hover .shoe-image {
+            transform: scale(1.05);
+        }
+
+        .shoe-info {
+            padding: 1.5rem;
+        }
+
+        .shoe-name {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .shoe-price {
+            font-size: 1.8rem;
+            color: #ff6b6b;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .add-to-cart {
+            width: 100%;
+            background: #4ecdc4;
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .add-to-cart:hover {
+            background: #45b7aa;
+        }
+
+        .featured {
+            background: linear-gradient(45deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+            padding: 4rem 2rem;
+            margin: 4rem 0;
+            border-radius: 20px;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        footer {
+            background: rgba(0,0,0,0.9);
+            color: white;
+            text-align: center;
+            padding: 3rem 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="#" class="logo">ShoeZone</a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#chelsea">Chelsea Boots</a></li>
+                <li><a href="#sports">Sports Shoes</a></li>
+                <li><a href="#featured">Featured</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Premium Sports & Chelsea Shoes</h1>
+            <p>Discover the perfect blend of style, comfort, and performance</p>
+            <a href="#sports" class="cta-button">Shop Now</a>
+        </div>
+    </section>
+
+    <div class="container">
+        <!-- Chelsea Boots Section -->
+        <section id="chelsea">
+            <h2>Chelsea Boots</h2>
+            <div class="grid">
+                <div class="shoe-card">
+                    <img src="https://images.unsplash.com/photo-1606890658317-7d14490b76fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=700&q=80" alt="Classic Black Chelsea Boots" class="shoe-image">
+                    <div class="shoe-info">
+                        <h3 class="shoe-name">Classic Black Chelsea</h3>
+                        <div class="shoe-price">$129</div>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="shoe-card">
+                    <img src="https://images.unsplash.com/photo-1605342879131-e501face88fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=700&q=80" alt="Brown Leather Chelsea" class="shoe-image">
+                    <div class="shoe-info">
+                        <h3 class="shoe-name">Premium Brown Chelsea</h3>
+                        <div class="shoe-price">$149</div>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="shoe-card">
+                    <img src="https://images.unsplash.com/photo-1605348532609-69511e90caca?ixlib=rb-4.0.3&auto=format&fit=crop&w=700&q=80" alt="Suede Chelsea Boots" class="shoe-image">
+                    <div class="shoe-info">
+                        <h3 class="shoe-name">Luxury Suede Chelsea</h3>
+                        <div class="shoe-price">$169</div>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sports Shoes Section -->
+        <section id="sports">
+            <h2>Sports Shoes Collection</h2>
+            <div class="grid">
+                <div class="shoe-card">
+                    <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=700&q=80" alt="Running Shoes" class="shoe-image">
+                    <div class="shoe-info">
+                        <h3 class="shoe-name">SpeedRunner Pro</h3>
+                        <div class="shoe-price">$89</div>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="shoe-card">
+                    <img src="https://images.unsplash.com/photo-1543163528-9ca15f093c3b?ixlib=rb-4.0.3&auto=format&fit=crop&w=700&q=80" alt="Basketball Shoes" class="shoe-image">
+                    <div class="shoe-info">
+                        <h3 class="shoe-name">HoopMaster 3000</h3>
+                        <div class="shoe-price">$119</div>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="shoe-card">
+                    <img src="https://images.unsplash.com/photo-1549298916-b41d501d3772?ixlib=rb-4.0.3&auto=format&fit=crop&w=700&q=80" alt="Training Shoes" class="shoe-image">
+                    <div class="shoe-info">
+                        <h3 class="shoe-name">GymWarrior Elite</h3>
+                        <div class="shoe-price">$99</div>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="shoe-card">
+                    <img src="https://images.unsplash.com/photo-1605342879131-e501face88fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=700&q=80" alt="Soccer Cleats" class="shoe-image">
+                    <div class="shoe-info">
+                        <h3 class="shoe-name">Soccer Pro Strike</h3>
+                        <div class="shoe-price">$139</div>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="shoe-card">
+                    <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=700&q=80" alt="Tennis Shoes" class="shoe-image">
+                    <div class="shoe-info">
+                        <h3 class="shoe-name">CourtAce Pro</h3>
+                        <div class="shoe-price">$109</div>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="shoe-card">
+                    <img src="https://images.unsplash.com/photo-1605348532760-6753d2c43329?ixlib=rb-4.0.3&auto=format&fit=crop&w=700&q=80" alt="Lifestyle Sneakers" class="shoe-image">
+                    <div class="shoe-info">
+                        <h3 class="shoe-name">StreetStyle Max</h3>
+                        <div class="shoe-price">$79</div>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Section -->
+        <section id="featured" class="featured">
+            <h2 style="color: #333;">🔥 Featured Deal</h2>
+            <div class="grid" style="grid-template-columns: 1fr;">
+                <div class="shoe-card">
+                    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Ultimate Sports Pack" class="shoe-image">
+                    <div class="shoe-info">
+                        <h3 class="shoe-name">Ultimate Sports Pack</h3>
+                        <p style="color: #666; margin-bottom: 1rem;">Get 3 pairs for the price of 2!</p>
+                        <div class="shoe-price" style="font-size: 2.2rem;">$199 <span style="text-decoration: line-through; font-size: 1.2rem; color: #999;">$297</span></div>
+                        <button class="add-to-cart">Grab Deal Now!</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 ShoeZone. All rights reserved. | Free shipping on orders over $50</p>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add to cart functionality
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+            button.addEventListener('click', function() {
+                const shoeName = this.parentElement.querySelector('.shoe-name').textContent;
+                const price = this.parentElement.querySelector('.shoe-price').textContent;
+                
+                // Simple alert (replace with real cart functionality)
+                alert(`✅ Added "${shoeName}" for ${price} to your cart!`);
+                
+                // Visual feedback
+                this.style.background = '#2ecc71';
+                this.textContent = 'Added!';
+                setTimeout(() => {
+                    this.style.background = '#4ecdc4';
+                    this.textContent = 'Add to Cart';
+                }, 2000);
+            });
+        });
+
+        // Parallax effect for hero
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+        });
+    </script>
+</body>
+</html>
